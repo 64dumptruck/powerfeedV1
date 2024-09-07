@@ -21,6 +21,19 @@ int reverse = HIGH;
 int limit = HIGH;
 
 
+void speed(){
+
+  digitalWrite(enbl, HIGH);
+  pd = map((analogRead(spd)),0,1023,200,2);
+  digitalWrite(pul, HIGH);
+  delayMicroseconds(pd);
+  digitalWrite(pul, LOW);
+  delayMicroseconds(pd);
+
+
+  
+}
+
 void setup() {
   
   pinMode (forwardS, INPUT_PULLUP);
@@ -44,26 +57,14 @@ limit = digitalRead(limitS);
 
 if ((forward == LOW) && (limit == HIGH) ){
     digitalWrite(dir, HIGH);
-    digitalWrite(enbl, HIGH);
-    pd = map((analogRead(spd)),0,1023,200,2);
-    digitalWrite(pul, HIGH);
-    delayMicroseconds(pd);
-    digitalWrite(pul, LOW);
-    delayMicroseconds(pd);
+    speed();
   
     }
 
 else if ((reverse == LOW) && (limit == HIGH) ) {
     digitalWrite(dir, LOW);
-    digitalWrite(enbl, HIGH);
-    pd = map((analogRead(spd)),0,1023,200,2);
-    digitalWrite(pul, HIGH);
-    delayMicroseconds(pd);
-    digitalWrite(pul, LOW);
-    delayMicroseconds(pd);
+    speed();
     
-
-
     }
 
 else{
